@@ -9,12 +9,12 @@ window.onload = function(){
   var randX = 0;
   randY = (Math.random() * canvas.height) + 1;
   icon.onload = setInterval(function(){
-    i += 3;
+    i += 7;
     if (i >= window.innerWidth) {
       i = 0;
       blah();
     }
-    ctx.clearRect(randX + i, randY, icon.width + 100, icon.height);
+    ctx.clearRect(randX + i, randY, icon.width + 1000, icon.height);
     ctx.drawImage(icon, randX + i, randY );
     canvas.onclick = function(event) {
       var minX = randX + i - 20;
@@ -24,7 +24,7 @@ window.onload = function(){
       var maxY = randY + icon.height;
       if (event.pageX < maxX && event.pageX > minX ) {
         if (event.pageY < maxY && event.pageY > minY) {
-          i -= 70;
+          i -= 190;
         }
       }
     };
