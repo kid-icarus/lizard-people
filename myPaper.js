@@ -5,7 +5,8 @@ var path = new Path();
 path.strokeColor = 'black';
 
 var start = new Point();
-
+var speed = 1;
+var mouseDown = 0;
 // Move to start and draw a line from there
 path.moveTo(start);
 path.add(new Point(100, 50));
@@ -32,11 +33,17 @@ function onFrame(event) {
   for (var i = 0; i < count; i++) {
     var item = project.activeLayer.children[i];
     
+    if (mouseDown === 1) {
+      speed += speed / 1160;
+    }
+    else if (mouseDown === 2) {
+      speed -= speed / 1160;
+    }
     // Move the item 1/20th of its width to the right. This way
     // larger circles move faster than smaller circles:
-    item.position.x += item.bounds.width / 2;
+    item.position.x += item.bounds.width / speed;
     item.rotate(3);
-    path.fillColor.hue += 1;
+    //item.opacity = 0.5;
 
     // If the item has left the view on the right, move it back
     // to the left:
@@ -47,5 +54,23 @@ function onFrame(event) {
 
   //path.rotate(3);
   //path.position += 5;
-  //path.fillColor.hue += 5;
+  path.fillColor.hue += item.bounds.width / speed;
 }
+
+var slowDown = document.getElementById('slow-down');
+slowDown.onmousedown = function(event) {
+  mouseDown = 1;
+};
+slowDown.onmouseup = function(event) {
+  mouseDown = 0;
+};
+var speedUp = document.getElementById('speed-up');
+speedUp.onmousedown = function(event) {
+    mouseDown = 2;
+
+};
+speedUp.onmouseup = function(event) {
+    mouseDown = 0;
+
+};
+
