@@ -1,0 +1,29 @@
+#slow-down,
+#speed-up {
+  top: 0;
+  font-size: 50px;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+  position: fixed;
+  height: 100%;
+  width: 5%;
+  padding-top: 300px;
+}
+
+#slow-down:hover, #speed-up:hover {
+  background-color: rgba(0,0,0,0.25);
+}
+
+#slow-down {
+  left: 0;
+}
+
+#speed-up {
+  right: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+} 
