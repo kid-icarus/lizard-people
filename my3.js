@@ -1,4 +1,10 @@
+
 $(document).ready(function() {
+
+        function derp(uppu) {
+          var herpderp;
+        }
+
         var music = new EightBit();
         music.setTimeSignature(4,4);
         music.setTempo(120);
@@ -71,10 +77,13 @@ $(document).ready(function() {
         // base, width, height
         // var geometry = new THREE.CubeGeometry(1,1,3);
         var geometry2 = new THREE.CubeGeometry(2,2,2);
+        var icogeo = new THREE.IcosahedronGeometry(1);
         var material = new THREE.MeshPhongMaterial( { color: 0x00ff00, wireframe: false, transparent: true, opacity: 0.50}   );
         var material2 = new THREE.MeshPhongMaterial( { color: 0x00ffff, ambient: 0xff0000, wireframe: false,transparent: true, opacity: 0.50}   );
+        var icomat = new THREE.MeshPhongMaterial( { color: 0xff0080, ambient: 0xff0000, wireframe: false,transparent: true, opacity: 0.50}   );
         cubes = [];
         boxes = [];
+        icosdawgs = [];
         for (var i = 0; i < 50; i++) {
           var geometry = new THREE.CubeGeometry(1,1,Math.random(10) * 10 + 3);
           cubes[i] = new THREE.Mesh(geometry, material);
@@ -88,6 +97,12 @@ $(document).ready(function() {
           boxes[i].position.y = Math.floor((Math.random(100) * 20) + 1) - 9;
           boxes[i].position.z = Math.floor((Math.random(100) * 20) + 1) - 9;
           scene.add(boxes[i]);
+
+          icosdawgs[i] = new THREE.Mesh(icogeo, icomat);
+          icosdawgs[i].position.x = Math.floor((Math.random(100) * 20) + 1) * 4 - 30;//* ( (Math.floor(Math.random(2)) % 2) * -1);
+          icosdawgs[i].position.y = Math.floor((Math.random(100) * 20) + 1) - 9;
+          icosdawgs[i].position.z = Math.floor((Math.random(100) * 20) + 1) - 9;
+          scene.add(icosdawgs[i]);
         }
         var cube2 = new THREE.Mesh(geometry2, material2);
         scene.add(cube2);
@@ -104,6 +119,7 @@ $(document).ready(function() {
             else {
               cubes[i].position.x += Math.PI / 10;
             }
+
             if (boxes[i].position.y < -20){
               // console.log('yo');
               boxes[i].position.y = 20;
@@ -111,9 +127,19 @@ $(document).ready(function() {
             else {
               boxes[i].position.y -= Math.PI / 30;
             }
+
+            if (icosdawgs[i].position.y > 20){
+              // console.log('yo');
+              icosdawgs[i].position.y = -20;
+            }
+            else {
+              icosdawgs[i].position.y += Math.PI / 30;
+            }
+
             cubes[i].rotation.x += Math.PI / 46;
             cubes[i].rotation.y += Math.PI / 46;
             boxes[i].rotation.y += Math.PI / 46;
+            icosdawgs[i].rotation.y += Math.PI / 46;
             // cubes[i].color.r += Math.PI / 55;
             // cubes[i].rotation.y += Math.PI / 55;
             // cubes[i].rotation.y += Math.PI / 55;
